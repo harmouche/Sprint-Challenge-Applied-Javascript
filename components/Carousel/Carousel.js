@@ -17,3 +17,42 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+// const content = document.querySelector('.carousel-container')
+
+function newCarousel() {
+// create elements
+const carousel = document.createElement('div')
+const leftBtn = document.createElement('div')
+const imgMountain = document.createElement('img')
+const imgComputer = document.createElement('img')
+const imgTrees = document.createElement('img')
+const imgTurntable = document.createElement('img')
+const rightBtn = document.createElement('div')
+
+
+// add structure
+carousel.appendChild(leftBtn)
+carousel.appendChild(imgMountain)
+carousel.appendChild(imgComputer)
+carousel.appendChild(imgTrees)
+carousel.appendChild(imgTurntable)
+carousel.appendChild(rightBtn)
+
+// add style
+carousel.classList.add('carousel')
+leftBtn.classList.add('left-button')
+rightBtn.classList.add('right-button')
+
+// add content
+imgMountain.src = "./assets/carousel/mountains.jpeg"
+imgComputer.src = "./assets/carousel/computer.jpeg"
+imgTrees.src = "./assets/carousel/trees.jpeg" 
+imgTurntable.src = "./assets/carousel/turntable.jpeg"
+
+return carousel
+}
+
+let carousel = document.querySelectorAll(".carousel");
+console.log(carousel);
+carousel.forEach(element => new newCarousel(element));
