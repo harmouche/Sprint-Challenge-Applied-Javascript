@@ -18,49 +18,45 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-
-
-const newArticle = (Object) => {
-
-    // create elements
-    const card = domain.createElement('div')
-    const cardHeadLine = domain.createElement('div')
-    const cardAuthor = domain.createElement('div')
-    const cardImgContainer = domain.createElement('div')
-    const cardImg = domain.createElement('img')
-    const cardByAuthor = domain.createElement('span')
-
-
-    // add structure
-    card.appendChild(cardHeadLine, cardAuthor)
-    cardAuthor.appendChild(cardImgContainer, cardByAuthor)
-    cardImgContainer.appendChild(cardImgContainer)
-
-    // add content
-    cardHeadLine.textContent = 'object.cardHeadLine'
-    cardImg.src = 'object.authorPhoto'
-    cardAuthor.textContent = 'object.authorName'
-    cardByAuthor.textContent = `By ${object.authorName}`
-    
-
-
-
-    return card
-
-}
+const content = document.querySelector('.cards-container')
 
 //axios APIs
 
-function lambdaTimes() {
-axios.get('https://lambda-times-backend.herokuapp.com/articles')
-.then(respone =>{
-    console.log(response)
 
-})
-.catch(error => {
-    console.log(error)
-})
-}
-console.log(lambdaTimes())
-console.log('test')
+    axios.get('https://lambda-times-backend.herokuapp.com/articles')
+    .then(s =>{
+        console.log(s.data.articles)
+        const news = s.data.articles
+            for(info in news) {
+                news[info].forEach(article => content.appendChild(createArticle(article)))
+            }
+    
+    })
+    .catch(error =>
+        console.log(error))
 
+ function createArticle(article){
+    const card = document.createElement('div')
+    const title = document.createElement('div')
+    const writer = document.createElement('div')
+    const iBox = document.createElement('div')
+    const image = document.createElement('img')
+    const span = document.createElement('span')
+
+     card.classList.add('card')
+    title.classList.add('headline')
+    writer.classList.add('author')
+    iBox.classList.add('img-container')
+    image.src = article.authorPhoto
+    span.textContent = `By ${article.authorName}`
+    title.textContent = article.headline
+
+     card.appendChild(title)
+    card.appendChild(writer)
+    card.appendChild(span)
+    writer.appendChild(iBox)
+    iBox.appendChild(image)
+
+     return card;
+}    
+    
